@@ -1,0 +1,24 @@
+branch-defaults:
+  develop:
+    environment: solaris-demo-api
+  init-setup:
+    environment: solaris-demo-api
+  main:
+    environment: solaris-demo-api
+    group_suffix: null
+deploy:
+  artifact: ./app.zip
+global:
+  application_name: solarisdemoapi
+  branch: null
+  default_ec2_keyname: null
+  default_platform: Node.js 16
+  default_region: eu-west-1
+  include_git_submodules: true
+  instance_profile: null
+  platform_name: null
+  platform_version: null
+  profile: null
+  repository: null
+  sc: null
+  workspace_type: Application

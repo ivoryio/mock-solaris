@@ -13,3 +13,10 @@ coverage/
 .vscode
 dist
 yarn.lock
+
+# Elastic Beanstalk Files
+#.elasticbeanstalk/*
+!.elasticbeanstalk/*.cfg.yml
+!.elasticbeanstalk/*.global.yml
+
+app.zip
