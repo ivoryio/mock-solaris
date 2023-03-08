@@ -36,6 +36,7 @@ import { oauthTokenAuthenticationMiddleware } from "./helpers/oauth";
 import { safeRequestHandler } from "./helpers/safeRequestHandler";
 import { shouldReturnJSON } from "./helpers";
 import { CardStatus } from "./helpers/types";
+import { generateMockData } from "./routes/generateMockData";
 const app = express();
 
 function logResponseBody(req, res, next) {
@@ -707,6 +708,9 @@ router.delete(
   checkRequestHostHeader,
   safeRequestHandler(webhooksAPI.deleteWebhookHandler)
 );
+
+// MOCK DATA
+app.post("/generate-mock-data", safeRequestHandler(generateMockData));
 
 // HEALTH CHECK
 app.get("/health", (req, res) => {
