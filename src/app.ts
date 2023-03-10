@@ -2,6 +2,7 @@ import express, { Router } from "express";
 import bodyParser from "body-parser";
 import swig from "swig";
 import path from "path";
+import cors from "cors";
 
 import * as log from "./logger";
 import * as oauthAPI from "./routes/oauth";
@@ -38,6 +39,7 @@ import { shouldReturnJSON } from "./helpers";
 import { CardStatus } from "./helpers/types";
 import { generateMockData } from "./routes/generateMockData";
 const app = express();
+app.use(cors());
 
 function logResponseBody(req, res, next) {
   const oldWrite = res.write;

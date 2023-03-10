@@ -173,7 +173,6 @@ export const migrate = async () => {
       terms_conditions_signed_at: "2022-01-01T00:00:00Z",
       data_terms_signed_at: "2022-01-01T00:00:00Z",
       own_economic_interest_signed_at: "2022-01-01T00:00:00Z",
-      iban: "DE43110101005555555555",
       id: "mock2ae44519fa2cc8e847e21221aa55b718",
       identifications: {
         "97b6f212-1b37-46c9-b25f-02759641e894": {

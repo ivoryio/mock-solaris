@@ -26,6 +26,7 @@
   "dependencies": {
     "bluebird": "^3.4.7",
     "body-parser": "^1.20.1",
+    "cors": "^2.8.5",
     "express": "^4.18.2",
     "express-winston": "^4.2.0",
     "http-status": "^1.6.1",
@@ -46,6 +47,7 @@
   },
   "devDependencies": {
     "@types/chai": "^4.3.4",
+    "@types/cors": "^2.8.13",
     "@types/express": "^4.17.15",
     "@types/express-winston": "^4.0.0",
     "@types/mocha": "^10.0.1",
