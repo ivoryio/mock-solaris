@@ -566,7 +566,12 @@ export const processQueuedBooking = async (
 
   if (receiver) {
     const receiverPerson = await getPerson(receiver.id);
-    receiverPerson.transactions.push(booking);
+
+    receiverPerson.transactions.push({
+      ...booking,
+      amount: { ...booking.amount, value: Math.abs(booking.amount.value) },
+    });
+
     if (directDebitReturn) {
       receiverPerson.transactions.push(directDebitReturn);
     }
