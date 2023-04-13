@@ -282,6 +282,29 @@ export const confirmChangeRequest = async (req, res) => {
   return res.status(status).send(response);
 };
 
+export const getChangeRequestToken = async (req, res) => {
+  const { person_id: personId } = req.body;
+  const changeRequestId = req.params.change_request_id;
+  const person = await getPerson(personId);
+  const changeRequestToken = person.changeRequest?.token;
+
+  if (!changeRequestToken) {
+    return res.status(404).send({
+      errors: [
+        {
+          id: Date.now().toString(),
+          status: 404,
+          code: "model_not_found",
+          title: "Model Not Found",
+          detail: `Couldn't find 'Solaris::ChangeRequest' for id '${personId}'`,
+        },
+      ],
+    });
+  }
+
+  return res.status(200).send({ token: changeRequestToken });
+};
+
 const assignAuthorizationToken = async (person) => {
   person.changeRequest.token = Date.now().toString().substr(-6);
   await savePerson(person);

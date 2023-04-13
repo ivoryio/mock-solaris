@@ -490,6 +490,11 @@ router.post(
   safeRequestHandler(changeRequestAPI.confirmChangeRequest)
 );
 
+router.post(
+  "/change_requests/:change_request_id/token",
+  safeRequestHandler(changeRequestAPI.getChangeRequestToken)
+);
+
 // SEIZURES
 router.get(
   "/persons/:person_id/seizures",
