@@ -282,13 +282,13 @@ export const confirmChangeRequest = async (req, res) => {
   return res.status(status).send(response);
 };
 
-export const token = async (req, res) => {
+export const getChangeRequestToken = async (req, res) => {
   const { person_id: personId } = req.body;
   const changeRequestId = req.params.change_request_id;
   const person = await getPerson(personId);
-  const token = person.changeRequest?.token;
+  const changeRequestToken = person.changeRequest?.token;
 
-  if (!token) {
+  if (!changeRequestToken) {
     return res.status(404).send({
       errors: [
         {
@@ -302,7 +302,7 @@ export const token = async (req, res) => {
     });
   }
 
-  return res.status(200).send({ token });
+  return res.status(200).send({ token: changeRequestToken });
 };
 
 const assignAuthorizationToken = async (person) => {

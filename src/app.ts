@@ -492,7 +492,7 @@ router.post(
 
 router.post(
   "/change_requests/:change_request_id/token",
-  safeRequestHandler(changeRequestAPI.token)
+  safeRequestHandler(changeRequestAPI.getChangeRequestToken)
 );
 
 // SEIZURES
