@@ -18,6 +18,7 @@ import {
   setPersonOrigin,
   getDeviceConsents,
   getDeviceActivities,
+  getWebhooks,
 } from "../db";
 import {
   createSepaDirectDebitReturn,
@@ -198,6 +199,11 @@ export const findIdentificationByEmail = (email, method) => {
 export const listPersons = async (req, res) => {
   const persons = await getAllPersons();
   res.render("persons", { persons });
+};
+
+export const listWebhooks = async (req, res) => {
+  const webhooks = await getWebhooks();
+  res.json(webhooks);
 };
 
 export const listPersonsCards = async (req, res) => {
@@ -512,11 +518,6 @@ export const processQueuedBooking = async (
     booking = generateBookingFromStandingOrder(booking);
   }
 
-  const allPersons = await getAllPersons();
-  const receiver = allPersons
-    .filter((dbPerson) => dbPerson.account)
-    .find((dbPerson) => dbPerson.account.iban === booking.recipient_iban);
-
   const isDirectDebit = [
     BookingType.DIRECT_DEBIT,
     BookingType.SEPA_DIRECT_DEBIT,
@@ -562,20 +563,6 @@ export const processQueuedBooking = async (
       directDebitReturn
     );
     await saveSepaDirectDebitReturn(sepaDirectDebitReturn);
-  }
-
-  if (receiver) {
-    const receiverPerson = await getPerson(receiver.id);
-
-    receiverPerson.transactions.push({
-      ...booking,
-      amount: { ...booking.amount, value: Math.abs(booking.amount.value) },
-    });
-
-    if (directDebitReturn) {
-      receiverPerson.transactions.push(directDebitReturn);
-    }
-    await savePerson(receiverPerson);
   }
 
   await savePerson(person);
