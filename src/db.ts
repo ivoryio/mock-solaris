@@ -271,6 +271,14 @@ export const migrate = async () => {
       queuedBookings: [],
     });
 
+    const mobileNumber = {
+      id: "mobileNumberId-mockpersonkontistgmbh-1d0146b4da4782b680dcd0353dbc0c54",
+      number: "+12345678",
+      verified: true,
+    };
+
+    await saveMobileNumber("mockpersonkontistgmbh", mobileNumber);
+
     await savePerson({
       salutation: "MS",
       first_name: "FirstName",

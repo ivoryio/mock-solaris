@@ -137,6 +137,7 @@ export const confirmMobileNumber = async (req, res) => {
   }
 
   delete person.changeRequest;
+  person.mobileNumber = existingMobileNumber;
   await savePerson(person);
 
   const mobileNumber = {
