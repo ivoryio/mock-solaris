@@ -797,12 +797,16 @@ const changeCardStatusAllowed = async (personId, cardId, newCardStatus) => {
 };
 
 export const changeCardStatusHandler = async (req, res) => {
-  const { personId, accountId, cardId, status } = req.body;
+  const { personId, accountId, cardId, status, shouldReturnJson } = req.body;
 
   await changeCardStatusAllowed(personId, cardId, status);
   await changeCardStatus({ personId, accountId }, cardId, status);
 
-  res.redirect("back");
+  if (shouldReturnJson) {
+    res.status(201).send({ success: true });
+  } else {
+    res.redirect("back");
+  }
 };
 
 export const createReservationHandler = async (req, res) => {
