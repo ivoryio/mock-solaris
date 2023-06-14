@@ -465,9 +465,14 @@ export const displayBackofficeOverview = (req, res) => {
 
 export const processQueuedBookingHandler = async (req, res) => {
   const { personId, id } = req.params;
+  const { shouldReturnJSON } = req.body;
 
   await processQueuedBooking(personId, id);
-  res.redirect("back");
+  if (shouldReturnJSON) {
+    return res.status(201).send();
+  } else {
+    res.redirect("back");
+  }
 };
 
 const generateBookingFromStandingOrder = (standingOrder) => {
